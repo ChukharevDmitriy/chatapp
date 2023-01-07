@@ -20,4 +20,3 @@ public:
 	void setUserPassword(std::string& password);
 	std::string getUserPassword() const;
 };
-

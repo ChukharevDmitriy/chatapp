@@ -14,7 +14,7 @@ void Chat::signUp()
 	std::cin >> login; //Wait user input
 
 	std::string name;
-	std::cout << "Введите имя пользователя:" << std::endl;
+	std::cout << "Введите отображаемое имя пользователя:" << std::endl;
 	std::cout << "> "; //Comand PROMPT
 	std::cin >> name; //Wait user input
 
@@ -26,7 +26,6 @@ void Chat::signUp()
 	_currentUser = std::make_shared<User>(login, name, pass);
 	_users.push_back(*_currentUser);
 
-	std::cout << std::endl;
 	std::cout << "Пользователь успешно зарегистрирован!" << std::endl;
 	std::cout << std::endl;
 }
@@ -75,4 +74,47 @@ void Chat::showLogInMenu()
 std::shared_ptr<User> Chat::getCurrentUser() const
 {
 	return _currentUser;
+}
+
+void Chat::showUserMenu()
+{
+	std::cout << "*** Введите желаемую команду: ***" << std::endl;
+	std::cout << "* Изменить имя .............. n *" << std::endl;
+	std::cout << "* Изменить пароль ........... p *" << std::endl;
+	std::cout << "* Выход из текущей сессии ... q *" << std::endl;
+
+	char userInput;
+	std::cout << "> "; //Comand PROMPT
+	std::cin >> userInput; //Wait user input
+	std::cout << std::endl;
+
+	if (userInput == 'n')
+	{
+		std::cout << "Введите новое отображаемое имя пользователя:" << std::endl;
+
+		std::string name;
+		std::cout << "> "; //Comand PROMPT
+		std::cin >> name; //Wait user input
+
+		_currentUser->setUserName(name);
+	}
+	else if (userInput == 'p')
+	{
+		std::cout << "Введите новый пароль:" << std::endl;
+
+		std::string password;
+		std::cout << "> "; //Comand PROMPT
+		std::cin >> password; //Wait user input
+
+		_currentUser->setUserPassword(password);
+	}
+	else if (userInput == 'q')
+	{
+		_currentUser = nullptr;
+	}
+	else
+	{
+		std::cout << "Вы ввели невеную команду!" << std::endl; //Error message if user input not define
+		std::cout << std::endl;
+	}
 }

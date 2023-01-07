@@ -14,10 +14,11 @@ private:
 
 	void logIn();
 	void signUp();
+
 public:
 	void start(); //Change work status to "ON"
 	bool isChatWork() const; //Return current work status
 	void showLogInMenu(); //Show Log In menu
 	std::shared_ptr<User> getCurrentUser() const;
+	void showUserMenu(); //Show User menu
 };
-

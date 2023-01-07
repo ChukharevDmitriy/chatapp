@@ -12,7 +12,9 @@ int main()
 
 		while (chat.getCurrentUser())
 		{
-			break;
+			std::cout << "Добро пожаловать , " << chat.getCurrentUser()->getUserName() << " !" << std::endl;
+			std::cout << std::endl;
+			chat.showUserMenu();
 		}
 	}
 	return 0;
