@@ -10,6 +10,10 @@ int main()
 	{
 		chat.showLogInMenu(); //Show Log In menu
 
+		while (chat.getCurrentUser())
+		{
+			break;
+		}
 	}
 	return 0;
 }

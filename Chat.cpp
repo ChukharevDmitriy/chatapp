@@ -8,7 +8,26 @@ void Chat::logIn()
 
 void Chat::signUp()
 {
-	std::cout << "Регаемся" << std::endl;
+	std::string login;
+	std::cout << "Введите login:" << std::endl;
+	std::cout << "> "; //Comand PROMPT
+	std::cin >> login; //Wait user input
+
+	std::string name;
+	std::cout << "Введите имя пользователя:" << std::endl;
+	std::cout << "> "; //Comand PROMPT
+	std::cin >> name; //Wait user input
+
+	std::string pass;
+	std::cout << "Введите пароль:" << std::endl;
+	std::cout << "> "; //Comand PROMPT
+	std::cin >> pass; //Wait user input
+
+	_currentUser = std::make_shared<User>(login, name, pass);
+	_users.push_back(*_currentUser);
+
+	std::cout << std::endl;
+	std::cout << "Пользователь успешно зарегистрирован!" << std::endl;
 	std::cout << std::endl;
 }
 
@@ -25,24 +44,24 @@ bool Chat::isChatWork() const
 void Chat::showLogInMenu()
 {
 	std::cout << "*** Введите желаемую команду: ***" << std::endl;
-	std::cout << "* Вход .................. login *" << std::endl;
-	std::cout << "* Регистрация .......... signup *" << std::endl;
-	std::cout << "* Выход из программы ..... quit *" << std::endl;
+	std::cout << "* Вход ...................... l *" << std::endl;
+	std::cout << "* Регистрация ............... s *" << std::endl;
+	std::cout << "* Выход из программы ........ q *" << std::endl;
 	
-	std::string userInput;
+	char userInput;
 	std::cout << "> "; //Comand PROMPT
 	std::cin >> userInput; //Wait user input
 	std::cout << std::endl;
 
-	if (userInput == "login")
+	if (userInput == 'l')
 	{
 		logIn();
 	}
-	else if (userInput == "signup")
+	else if (userInput == 's')
 	{
 		signUp();
 	}
-	else if (userInput == "quit")
+	else if (userInput == 'q')
 	{
 		_workStatus = false; //Change work status to "OFF"
 	}
@@ -51,4 +70,9 @@ void Chat::showLogInMenu()
 		std::cout << "Вы ввели невеную команду!" << std::endl; //Error message if user input not define
 		std::cout << std::endl;
 	}
+}
+
+std::shared_ptr<User> Chat::getCurrentUser() const
+{
+	return _currentUser;
 }
