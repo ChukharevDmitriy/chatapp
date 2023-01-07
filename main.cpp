@@ -2,13 +2,13 @@
 
 int main()
 {
-	Chat chat;
+	Chat chat; //Create chat object
 
-	chat.start();
+	chat.start(); //Set chat`s status is "ON"
 
-	while (chat.isChatWork())
+	while (chat.isChatWork()) //Verify that chat is "ON"
 	{
-		chat.showLogInMenu();
+		chat.showLogInMenu(); //Show Log In menu
 
 	}
 	return 0;

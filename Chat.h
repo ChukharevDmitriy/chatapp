@@ -5,13 +5,13 @@
 class Chat
 {
 private:
-	bool _workStatus = false;
+	bool _workStatus = false; // Chat work status: "ON" - true, "OFF" - false (default is "OFF")
 
 	void logIn();
 	void signUp();
 public:
-	void start();
-	bool isChatWork() const;
-	void showLogInMenu();
+	void start(); //Change work status to "ON"
+	bool isChatWork() const; //Return current work status
+	void showLogInMenu(); //Show Log In menu
 };
 

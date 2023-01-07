@@ -30,8 +30,8 @@ void Chat::showLogInMenu()
 	std::cout << "* Выход из программы ..... quit *" << std::endl;
 	
 	std::string userInput;
-	std::cout << ">";
-	std::cin >> userInput;
+	std::cout << "> "; //Comand PROMPT
+	std::cin >> userInput; //Wait user input
 	std::cout << std::endl;
 
 	if (userInput == "login")
@@ -44,11 +44,11 @@ void Chat::showLogInMenu()
 	}
 	else if (userInput == "quit")
 	{
-		_workStatus = false;
+		_workStatus = false; //Change work status to "OFF"
 	}
 	else
 	{
-		std::cout << "Вы ввели невеную команду!" << std::endl;
+		std::cout << "Вы ввели невеную команду!" << std::endl; //Error message if user input not define
 		std::cout << std::endl;
 	}
 }
