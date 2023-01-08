@@ -8,26 +8,43 @@ void Chat::logIn()
 
 void Chat::signUp()
 {
-	std::string login;
-	std::cout << "Введите login:" << std::endl;
-	std::cout << "> "; //Comand PROMPT
-	std::cin >> login; //Wait user input
+	try
+	{
+		std::string login;
+		std::cout << "Введите login:" << std::endl;
+		std::cout << "> "; //Comand PROMPT
+		std::cin >> login; //Wait user input
 
-	std::string name;
-	std::cout << "Введите отображаемое имя пользователя:" << std::endl;
-	std::cout << "> "; //Comand PROMPT
-	std::cin >> name; //Wait user input
+		for (int i = 0; i < _users.size(); i++)
+		{
+			if (login == _users[i].getUserLogin())
+			{
+				throw "Такой login уже зарегистрирован!";
+			}
+		}
 
-	std::string pass;
-	std::cout << "Введите пароль:" << std::endl;
-	std::cout << "> "; //Comand PROMPT
-	std::cin >> pass; //Wait user input
+		std::string name;
+		std::cout << "Введите отображаемое имя пользователя:" << std::endl;
+		std::cout << "> "; //Comand PROMPT
+		std::cin >> name; //Wait user input
 
-	_currentUser = std::make_shared<User>(login, name, pass);
-	_users.push_back(*_currentUser);
+		std::string pass;
+		std::cout << "Введите пароль:" << std::endl;
+		std::cout << "> "; //Comand PROMPT
+		std::cin >> pass; //Wait user input
 
-	std::cout << "Пользователь успешно зарегистрирован!" << std::endl;
-	std::cout << std::endl;
+		_currentUser = std::make_shared<User>(login, name, pass);
+		_users.push_back(*_currentUser);
+
+		std::cout << "Пользователь успешно зарегистрирован!" << std::endl;
+		std::cout << std::endl;
+	}
+	catch (const char* exception)
+	{
+		std::cout << std::endl;
+		std::cout << exception << std::endl;
+		std::cout << std::endl;
+	}
 }
 
 void Chat::start()
