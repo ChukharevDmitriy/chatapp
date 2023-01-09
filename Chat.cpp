@@ -1,8 +1,9 @@
 #include "Chat.h"
+#include "color_txt.h"
 
 void Chat::logIn()
 {
-	std::cout << "Входим" << std::endl;
+	std::cout <<BOLD_GREEN<< "Входим" <<RESET<< std::endl;
 	std::cout << std::endl;
 }
 
@@ -36,7 +37,7 @@ void Chat::signUp()
 		_currentUser = std::make_shared<User>(login, name, pass);
 		_users.push_back(*_currentUser);
 
-		std::cout << "Пользователь успешно зарегистрирован!" << std::endl;
+		std::cout << GREEN <<"Пользователь успешно зарегистрирован!" <<RESET<< std::endl;
 		std::cout << std::endl;
 	}
 	catch (const char* exception)
@@ -83,7 +84,7 @@ void Chat::showLogInMenu()
 	}
 	else
 	{
-		std::cout << "Вы ввели невеную команду!" << std::endl; //Error message if user input not define
+		std::cout << RED <<"Вы ввели неверную команду!" <<RESET << std::endl; //Error message if user input not define
 		std::cout << std::endl;
 	}
 }
@@ -131,7 +132,7 @@ void Chat::showUserMenu()
 	}
 	else
 	{
-		std::cout << "Вы ввели невеную команду!" << std::endl; //Error message if user input not define
+		std::cout << RED<<"Вы ввели невеную команду!" <<RESET<< std::endl; //Error message if user input not define
 		std::cout << std::endl;
 	}
 }
