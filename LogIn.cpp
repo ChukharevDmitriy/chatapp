@@ -10,7 +10,7 @@ void Chat::logIn()
 	std::cout << "Введите пароль:" << std::endl;
 	std::cout << "> "; //Comand PROMPT
 	std::cin >> pass; //Wait user input
-	bool n = 0;// счетчик совпадений
+	bool n = false;// счетчик совпадений
 	int k;// счетчик местоположения
 	for (int i = 0; i < _users.size(); i++)
 	{

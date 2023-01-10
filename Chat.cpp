@@ -54,33 +54,45 @@ bool Chat::isChatWork() const
 
 void Chat::showLogInMenu()
 {
-	std::cout << "*** Введите желаемую команду: ***" << std::endl;
-	std::cout << "* Вход ...................... l *" << std::endl;
-	std::cout << "* Регистрация ............... s *" << std::endl;
-	std::cout << "* Выход из программы ........ q *" << std::endl;
+	std::cout <<YELLOW<< "*** Введите желаемую команду: ***" << std::endl;
+	std::cout << "* Вход ...................... 1 *" << std::endl;
+	std::cout << "* Регистрация ............... 2 *" << std::endl;
+	std::cout << "* Отправить сообщение ........3 *" << std::endl;
+	std::cout << "* Прочитать сообщения ........4 *" << std::endl;
+	std::cout << "* Выход из программы ........ 0 *" <<RESET<< std::endl;
 	
-	string userInput;
+	int userInput;
 	std::cout << "> "; //Comand PROMPT
 	std::cin >> userInput; //Wait user input
 	std::cout << std::endl;
-
-	if (userInput == "l")
+	switch (userInput)
 	{
-		logIn();
-	}
-	else if (userInput == "s")
+	case 1: 
+	{	logIn();
+		break; }
+	case 2:
 	{
 		signUp();
+		break;
 	}
-	else if (userInput == "q")
+	case 3:
+	{	//makeMassege();
+	break; }
+	case 4:
+	{	//readMessage();
+	break; }
+	case 0:
 	{
 		_workStatus = false; //Change work status to "OFF"
-	}
-	else
+		break; }
+	default:
 	{
-		std::cout << RED <<"Вы ввели неверную команду!" <<RESET << std::endl; //Error message if user input not define
+		std::cout << RED << "Вы ввели неверную команду!" << RESET << std::endl; //Error message if user input not define
 		std::cout << std::endl;
+		_workStatus = false; //Change work status to "OFF"
+		break;
 	}
+	} //switch
 }
 
 std::shared_ptr<User> Chat::getCurrentUser() const
