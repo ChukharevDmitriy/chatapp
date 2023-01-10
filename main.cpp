@@ -15,7 +15,8 @@ int main()
 		{
 			std::cout <<GREEN<< "Добро пожаловать , " <<RESET<< chat.getCurrentUser()->getUserName() << " !" << std::endl;
 			std::cout << std::endl;
-			chat.showUserMenu();
+			chat.showLogInMenu();
+			//chat.showUserMenu();
 		}
 	}
 	return 0;

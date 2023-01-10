@@ -1,5 +1,8 @@
 #include "Chat.h"
 #include "color_txt.h"
+#include "message.h"
+void Chat::makeMessage() {}
+void Chat::readMessage(){}
 
 void Chat::signUp()
 {
@@ -51,14 +54,31 @@ bool Chat::isChatWork() const
 {
 	return _workStatus;
 }
+void makeMessage() 
+{
+	std::string _to, _text;
+	std::cout << " Напишите логин адресата" << endl;
+	std::cout << " Напишите all - если для всех адресатов" << endl;
+	std::cin >> _to;
+	//If (getfindUsertoLogin(_to) || _to=="all") 
+	//{
+		//std::cout << " Напишите текст для адресата(-ов)" << endl;
+		//cin.ignore();
+		//getline(cin, _text);
+		//messages_push_back(Message{ _currentUser->getUserLogin(), getfindUsertoLogin->getUserLogin, _text });
+	//}
+	//else { 
+		//std::cout << RED << "Такого пользователя нет! " << RESET << endl;
+		//return; }
+}
+void readMessage() {}
+
 
 void Chat::showLogInMenu()
 {
 	std::cout <<YELLOW<< "*** Введите желаемую команду: ***" << std::endl;
 	std::cout << "* Вход ...................... 1 *" << std::endl;
 	std::cout << "* Регистрация ............... 2 *" << std::endl;
-	std::cout << "* Отправить сообщение ........3 *" << std::endl;
-	std::cout << "* Прочитать сообщения ........4 *" << std::endl;
 	std::cout << "* Выход из программы ........ 0 *" <<RESET<< std::endl;
 	
 	int userInput;
@@ -69,21 +89,19 @@ void Chat::showLogInMenu()
 	{
 	case 1: 
 	{	logIn();
+
 		break; }
 	case 2:
 	{
 		signUp();
+		showUserMenu();
 		break;
 	}
-	case 3:
-	{	//makeMassege();
-	break; }
-	case 4:
-	{	//readMessage();
-	break; }
 	case 0:
 	{
+		_currentUser = nullptr;
 		_workStatus = false; //Change work status to "OFF"
+		return;
 		break; }
 	default:
 	{
@@ -94,7 +112,6 @@ void Chat::showLogInMenu()
 	}
 	} //switch
 }
-
 std::shared_ptr<User> Chat::getCurrentUser() const
 {
 	return _currentUser;
@@ -103,42 +120,54 @@ std::shared_ptr<User> Chat::getCurrentUser() const
 void Chat::showUserMenu()
 {
 	std::cout << "*** Введите желаемую команду: ***" << std::endl;
-	std::cout << "* Изменить имя .............. n *" << std::endl;
-	std::cout << "* Изменить пароль ........... p *" << std::endl;
-	std::cout << "* Выход из текущей сессии ... q *" << std::endl;
+	std::cout << "* Изменить имя .............. 1 *" << std::endl;
+	std::cout << "* Изменить пароль ........... 2 *" << std::endl;
+	std::cout << "* Отправить сообщение ........3 *" << std::endl;
+	std::cout << "* Прочитать сообщения ........4 *" << std::endl;
+	std::cout << "* Выход в предидущее меню ........ 0 *" << RESET << std::endl;
 
-	string userInput;
+	int userInput=9;
 	std::cout << "> "; //Comand PROMPT
 	std::cin >> userInput; //Wait user input
 	std::cout << std::endl;
-
-	if (userInput == "n")
+	switch (userInput)
+	{
+	case 1:
 	{
 		std::cout << "Введите новое отображаемое имя пользователя:" << std::endl;
-
 		std::string name;
 		std::cout << "> "; //Comand PROMPT
 		std::cin >> name; //Wait user input
-
 		_currentUser->setUserName(name);
-	}
-	else if (userInput == "p")
+		break; }
+	case 2:
 	{
 		std::cout << "Введите новый пароль:" << std::endl;
-
 		std::string password;
 		std::cout << "> "; //Comand PROMPT
 		std::cin >> password; //Wait user input
-
 		_currentUser->setUserPassword(password);
+		break;
 	}
-	else if (userInput == "q")
+	case 3:
 	{
-		_currentUser = nullptr;
-	}
-	else
+		makeMessage();
+		break; }
+	case 4:
 	{
-		std::cout << RED<<"Вы ввели невеную команду!" <<RESET<< std::endl; //Error message if user input not define
+		readMessage();
+		break; }
+	case 0:
+	{
+		showLogInMenu();
+		_workStatus = false; //Change work status to "OFF"
+		break; }
+	default:
+	{
+		std::cout << RED << "Вы ввели неверную команду!" << RESET << std::endl; //Error message if user input not define
 		std::cout << std::endl;
+		_workStatus = false; //Change work status to "OFF"
+		break;
 	}
+	} //switch
 }
