@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+using namespace std;
 
 class Chat
 {
@@ -21,4 +22,13 @@ public:
 	void showLogInMenu(); //Show Log In menu
 	std::shared_ptr<User> getCurrentUser() const;
 	void showUserMenu(); //Show User menu
+};
+class bad_sing : public exception
+{
+public:
+	virtual const char* what() const noexcept override
+	{
+		return "неверный логин или пароль";
+		cout << endl;
+	}
 };

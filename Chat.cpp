@@ -1,12 +1,6 @@
 #include "Chat.h"
 #include "color_txt.h"
 
-void Chat::logIn()
-{
-	std::cout <<BOLD_GREEN<< "Входим" <<RESET<< std::endl;
-	std::cout << std::endl;
-}
-
 void Chat::signUp()
 {
 	try
@@ -65,20 +59,20 @@ void Chat::showLogInMenu()
 	std::cout << "* Регистрация ............... s *" << std::endl;
 	std::cout << "* Выход из программы ........ q *" << std::endl;
 	
-	char userInput;
+	string userInput;
 	std::cout << "> "; //Comand PROMPT
 	std::cin >> userInput; //Wait user input
 	std::cout << std::endl;
 
-	if (userInput == 'l')
+	if (userInput == "l")
 	{
 		logIn();
 	}
-	else if (userInput == 's')
+	else if (userInput == "s")
 	{
 		signUp();
 	}
-	else if (userInput == 'q')
+	else if (userInput == "q")
 	{
 		_workStatus = false; //Change work status to "OFF"
 	}
@@ -101,12 +95,12 @@ void Chat::showUserMenu()
 	std::cout << "* Изменить пароль ........... p *" << std::endl;
 	std::cout << "* Выход из текущей сессии ... q *" << std::endl;
 
-	char userInput;
+	string userInput;
 	std::cout << "> "; //Comand PROMPT
 	std::cin >> userInput; //Wait user input
 	std::cout << std::endl;
 
-	if (userInput == 'n')
+	if (userInput == "n")
 	{
 		std::cout << "Введите новое отображаемое имя пользователя:" << std::endl;
 
@@ -116,7 +110,7 @@ void Chat::showUserMenu()
 
 		_currentUser->setUserName(name);
 	}
-	else if (userInput == 'p')
+	else if (userInput == "p")
 	{
 		std::cout << "Введите новый пароль:" << std::endl;
 
@@ -126,7 +120,7 @@ void Chat::showUserMenu()
 
 		_currentUser->setUserPassword(password);
 	}
-	else if (userInput == 'q')
+	else if (userInput == "q")
 	{
 		_currentUser = nullptr;
 	}
