@@ -1,8 +1,6 @@
 #include "Chat.h"
 #include "color_txt.h"
 #include "message.h"
-void Chat::makeMessage() {}
-void Chat::readMessage(){}
 
 void Chat::signUp()
 {
@@ -20,12 +18,10 @@ void Chat::signUp()
 				throw "Такой login уже зарегистрирован!";
 			}
 		}
-
 		std::string name;
 		std::cout << "Введите отображаемое имя пользователя:" << std::endl;
 		std::cout << "> "; //Comand PROMPT
 		std::cin >> name; //Wait user input
-
 		std::string pass;
 		std::cout << "Введите пароль:" << std::endl;
 		std::cout << "> "; //Comand PROMPT
@@ -54,26 +50,32 @@ bool Chat::isChatWork() const
 {
 	return _workStatus;
 }
-void makeMessage() 
+bool Chat::getfindUsertoLogin() { bool presentUser = true;  return presentUser; }
+
+void Chat::makeMessage()
 {
+	std::cout << "Пишем сообщения" << endl;
 	std::string _to, _text;
 	std::cout << " Напишите логин адресата" << endl;
 	std::cout << " Напишите all - если для всех адресатов" << endl;
 	std::cin >> _to;
-	//If (getfindUsertoLogin(_to) || _to=="all") 
-	//{
-		//std::cout << " Напишите текст для адресата(-ов)" << endl;
-		//cin.ignore();
-		//getline(cin, _text);
-		//messages_push_back(Message{ _currentUser->getUserLogin(), getfindUsertoLogin->getUserLogin, _text });
-	//}
-	//else { 
-		//std::cout << RED << "Такого пользователя нет! " << RESET << endl;
-		//return; }
+	
+	if (getfindUsertoLogin() || _to == "all")
+	{
+		std::cout << " Напишите текст для адресата(-ов)" << endl;
+		cin.ignore();
+		getline(cin, _text);
+		//messages_.push_back(Message{ _currentUser->getUserLogin(), _to, _text });
+	}
+	else {
+		std::cout << RED << "Такого пользователя нет! " << RESET << endl;
+		return;
+		 }
 }
-void readMessage() {}
 
-
+void Chat::readMessage() {
+	cout << "Чтение сообщений"<<endl;
+}
 void Chat::showLogInMenu()
 {
 	std::cout <<YELLOW<< "*** Введите желаемую команду: ***" << std::endl;
@@ -89,7 +91,7 @@ void Chat::showLogInMenu()
 	{
 	case 1: 
 	{	logIn();
-
+	showUserMenu();
 		break; }
 	case 2:
 	{
@@ -124,7 +126,7 @@ void Chat::showUserMenu()
 	std::cout << "* Изменить пароль ........... 2 *" << std::endl;
 	std::cout << "* Отправить сообщение ........3 *" << std::endl;
 	std::cout << "* Прочитать сообщения ........4 *" << std::endl;
-	std::cout << "* Выход в предидущее меню ........ 0 *" << RESET << std::endl;
+	std::cout << "* Выход в предидущее меню ....0 *" << RESET << std::endl;
 
 	int userInput=9;
 	std::cout << "> "; //Comand PROMPT
@@ -152,10 +154,12 @@ void Chat::showUserMenu()
 	case 3:
 	{
 		makeMessage();
+		showUserMenu();
 		break; }
 	case 4:
 	{
 		readMessage();
+		showUserMenu();
 		break; }
 	case 0:
 	{

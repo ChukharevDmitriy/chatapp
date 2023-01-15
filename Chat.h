@@ -18,6 +18,7 @@ private:
 	void signUp();
 	void makeMessage();
 	void readMessage();
+	bool getfindUsertoLogin();
 	std::vector<Message>& getAllMessages() { return messagesList_; }
 	//std::shared_ptr<User> getUsertoLogin(const std::string& login) const;
 public:
