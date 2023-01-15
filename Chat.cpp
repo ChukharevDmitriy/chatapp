@@ -65,7 +65,7 @@ void Chat::makeMessage()
 		std::cout << " Напишите текст для адресата(-ов)" << endl;
 		cin.ignore();
 		getline(cin, _text);
-		//messages_.push_back(Message{ _currentUser->getUserLogin(), _to, _text });
+		messagesList_.push_back(Message{ _currentUser->getUserLogin(), _to, _text });
 	}
 	else {
 		std::cout << RED << "Такого пользователя нет! " << RESET << endl;
@@ -74,7 +74,21 @@ void Chat::makeMessage()
 }
 
 void Chat::readMessage() {
+	string from;
+	string to;
 	cout << "Чтение сообщений"<<endl;
+	//for(auto&messageList_:message)
+	//{
+	// if (currentUser_->getUserLogin() ==message.getfromUser() || message.gettoUser=="all")
+	// {
+	// from=(currentUser_->getUserLogin==message.getfromUser();
+	// if(message.gettoUser=="all")
+	// {to="all";}
+	// else 
+	// {to="for me";}
+	// cout<<"Сообщение от "<<from<<"кому "<<to<< endl;
+	// cout<<"Текст: "<<message.gettextmessage()<<endl;
+//}
 }
 void Chat::showLogInMenu()
 {
