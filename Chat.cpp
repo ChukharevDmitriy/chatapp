@@ -1,7 +1,8 @@
 #include "Chat.h"
 #include "color_txt.h"
 #include "message.h"
-
+//#include <algorithm>
+//#include <iostream>
 void Chat::signUp()
 {
 	try
@@ -50,7 +51,15 @@ bool Chat::isChatWork() const
 {
 	return _workStatus;
 }
-bool Chat::getfindUsertoLogin() { bool presentUser = true;  return presentUser; }
+bool Chat::getfindUsertoLogin(string curuser) { 
+	bool presentUser=true;
+	//int nom = find(_users.begin(), _users.end(), curuser);
+	//if (nom >=0) {
+		
+		//presentUser= true;
+	//}
+	//else presentUser = false;
+	return presentUser; }
 
 void Chat::makeMessage()
 {
@@ -60,7 +69,8 @@ void Chat::makeMessage()
 	std::cout << " Напишите all - если для всех адресатов" << endl;
 	std::cin >> _to;
 	
-	if (getfindUsertoLogin() || _to == "all")
+	//if (getfindUsertoLogin() || _to == "all")
+	if (_to=="all")
 	{
 		std::cout << " Напишите текст для адресата(-ов)" << endl;
 		cin.ignore();
@@ -73,22 +83,27 @@ void Chat::makeMessage()
 		 }
 }
 
-void Chat::readMessage() {
+void Chat::readMessage() 
+{
 	string from;
 	string to;
-	cout << "Чтение сообщений"<<endl;
-	//for(auto&messageList_:message)
+	std::cout << "Чтение сообщений"<<std::endl;
+	//int i=0;
+	//for (auto i=messagesList_.begin(); i!=messagesList_.end(); i++)
 	//{
-	// if (currentUser_->getUserLogin() ==message.getfromUser() || message.gettoUser=="all")
-	// {
-	// from=(currentUser_->getUserLogin==message.getfromUser();
-	// if(message.gettoUser=="all")
-	// {to="all";}
-	// else 
-	// {to="for me";}
-	// cout<<"Сообщение от "<<from<<"кому "<<to<< endl;
-	// cout<<"Текст: "<<message.gettextmessage()<<endl;
-//}
+		//if (_currentUser->getUserLogin() == messagesList_[i].getfromUser() || messagesList_[i].gettoUser() == "all")
+		//{
+			//from = (_currentUser->getUserLogin() == messagesList_[i].getfromUser());
+		//}
+		//if (messagesList_[i].gettoUser() == "all")
+		//{
+			//to = "all";
+		//}
+		 //else 
+		 //{to="for me";}
+		// std::cout<<"Сообщение от "<<from<<"кому "<<to<< std::endl;
+		// std::cout << "Текст: " << messagesList_[i].gettextmessage() << std:: endl;
+	//}
 }
 void Chat::showLogInMenu()
 {
