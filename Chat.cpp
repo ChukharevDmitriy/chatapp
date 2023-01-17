@@ -48,16 +48,63 @@ bool Chat::isChatWork() const
 }
 void Chat::sendMessages()
 {
-	
+	std::cout << "Выберите адреста из списка:" << std::endl;
+	showUsernames();
+	int userInput;
+	std::cout << "> "; //Comand PROMPT
+	std::cin >> userInput; //Wait user input
+	std::cout << std::endl;
+
+	std::string _toUser;
+
+	if (userInput == 0)
+	{
+		_toUser = "all";
+	}
+	else
+	{
+		int i = userInput - 1;
+		_toUser = _users[i].getUserName();
+	}
+
+	std::cout << "Введите сообщение для адреста " << _toUser << " :" << std::endl;
+	std::string _textMessage;
+	std::cout << "> "; //Comand PROMPT
+	std::cin >> _textMessage; //Wait user input
+	std::cout << std::endl;
+		
+	_messages.push_back(*std::make_shared<Message>(_currentUser->getUserName(), _toUser, _textMessage));
+
+	std::cout << GREEN << "Сообщение успешно отправлено!" << RESET << std::endl;
+	std::cout << std::endl;
 }
 void Chat::showUsernames() const
 {
+	for (int i = 0; i < _users.size(); i++)
+	{
+		std::cout << i + 1 << ". " << _users[i].getUserName() << std::endl;
+	}
+	std::cout << "0. Общий чат" << std::endl;
 }
 void Chat::readMyMessages() const
 {
+	for (int i = 0; i < _messages.size(); i++)
+	{
+		if (_messages[i].getToUser() == this->_currentUser->getUserName())
+		{
+			std::cout << _messages[i].getFromUser() << " : " << _messages[i].getTextMessage() << std::endl;
+		}
+	}
 }
 void Chat::readAllMessages() const
 {
+	for (int i = 0; i < _messages.size(); i++)
+	{
+		if (_messages[i].getToUser() == "all")
+		{
+			std::cout << _messages[i].getFromUser() << " : " << _messages[i].getTextMessage() << std::endl;
+		}
+	}
 }
 void Chat::showLogInMenu()
 {
@@ -93,7 +140,7 @@ void Chat::showLogInMenu()
 		_workStatus = false; //Change work status to "OFF"
 		break;
 	}
-	} //switch
+	}
 }
 std::shared_ptr<User> Chat::getCurrentUser() const
 {
@@ -152,12 +199,14 @@ void Chat::showUserMenu()
 		case 1:
 		{
 			readMyMessages();
-			break;
+			std::cout << std::endl;
+			showUserMenu();
 		}
 		case 2:
 		{
 			readAllMessages();
-			break;
+			std::cout << std::endl;
+			showUserMenu();
 		}
 		default:
 			break;
