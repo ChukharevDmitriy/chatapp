@@ -26,8 +26,7 @@ void Chat::logIn()
 		else if (_users[k].getUserPassword() == pass) 
 		{
 			std::string name = _users[k].getUserName();
-			_currentUser = std::make_shared<User>(login, name, pass);
-			_users.push_back(*_currentUser);
+			_currentUser = std::shared_ptr<User>(&_users[k]);
 		}
 		else if (_users[k].getUserPassword() != pass)
 		{
@@ -35,9 +34,9 @@ void Chat::logIn()
 		}
 
 	}
-	catch (exception& e)
+	catch (std::exception& e)
 	{
-		cout << e.what() << endl;
+		std::cout << e.what() << std::endl;
 	}
 	n = 0;
 	k = 0;

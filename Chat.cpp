@@ -1,6 +1,4 @@
 #include "Chat.h"
-#include "color_txt.h"
-#include "message.h"
 
 void Chat::signUp()
 {
@@ -40,55 +38,26 @@ void Chat::signUp()
 		std::cout << std::endl;
 	}
 }
-
 void Chat::start()
 {
 	_workStatus = true;
 }
-
 bool Chat::isChatWork() const
 {
 	return _workStatus;
 }
-bool Chat::getfindUsertoLogin() { bool presentUser = true;  return presentUser; }
-
-void Chat::makeMessage()
+void Chat::sendMessages()
 {
-	std::cout << "Пишем сообщения" << endl;
-	std::string _to, _text;
-	std::cout << " Напишите логин адресата" << endl;
-	std::cout << " Напишите all - если для всех адресатов" << endl;
-	std::cin >> _to;
 	
-	if (getfindUsertoLogin() || _to == "all")
-	{
-		std::cout << " Напишите текст для адресата(-ов)" << endl;
-		cin.ignore();
-		getline(cin, _text);
-		messagesList_.push_back(Message{ _currentUser->getUserLogin(), _to, _text });
-	}
-	else {
-		std::cout << RED << "Такого пользователя нет! " << RESET << endl;
-		return;
-		 }
 }
-
-void Chat::readMessage() {
-	string from;
-	string to;
-	cout << "Чтение сообщений"<<endl;
-	//for(auto&messageList_:message)
-	//{
-	// if (currentUser_->getUserLogin() ==message.getfromUser() || message.gettoUser=="all")
-	// {
-	// from=(currentUser_->getUserLogin==message.getfromUser();
-	// if(message.gettoUser=="all")
-	// {to="all";}
-	// else 
-	// {to="for me";}
-	// cout<<"Сообщение от "<<from<<"кому "<<to<< endl;
-	// cout<<"Текст: "<<message.gettextmessage()<<endl;
-//}
+void Chat::showUsernames() const
+{
+}
+void Chat::readMyMessages() const
+{
+}
+void Chat::readAllMessages() const
+{
 }
 void Chat::showLogInMenu()
 {
@@ -105,12 +74,10 @@ void Chat::showLogInMenu()
 	{
 	case 1: 
 	{	logIn();
-	showUserMenu();
 		break; }
 	case 2:
 	{
 		signUp();
-		showUserMenu();
 		break;
 	}
 	case 0:
@@ -132,7 +99,6 @@ std::shared_ptr<User> Chat::getCurrentUser() const
 {
 	return _currentUser;
 }
-
 void Chat::showUserMenu()
 {
 	std::cout << "*** Введите желаемую команду: ***" << std::endl;
@@ -140,9 +106,9 @@ void Chat::showUserMenu()
 	std::cout << "* Изменить пароль ........... 2 *" << std::endl;
 	std::cout << "* Отправить сообщение ........3 *" << std::endl;
 	std::cout << "* Прочитать сообщения ........4 *" << std::endl;
-	std::cout << "* Выход в предидущее меню ....0 *" << RESET << std::endl;
+	std::cout << "* Сменить пользователя .......0 *" << RESET << std::endl;
 
-	int userInput=9;
+	int userInput;
 	std::cout << "> "; //Comand PROMPT
 	std::cin >> userInput; //Wait user input
 	std::cout << std::endl;
@@ -155,7 +121,8 @@ void Chat::showUserMenu()
 		std::cout << "> "; //Comand PROMPT
 		std::cin >> name; //Wait user input
 		_currentUser->setUserName(name);
-		break; }
+		break;
+	}
 	case 2:
 	{
 		std::cout << "Введите новый пароль:" << std::endl;
@@ -167,19 +134,40 @@ void Chat::showUserMenu()
 	}
 	case 3:
 	{
-		makeMessage();
-		showUserMenu();
-		break; }
+		sendMessages();
+		break;
+	}
 	case 4:
 	{
-		readMessage();
-		showUserMenu();
-		break; }
+		std::cout << "*** Какие сообщения прочитать: ***" << std::endl;
+		std::cout << "* Личные сообщения ........... 1 *" << std::endl;
+		std::cout << "* Общий чат .................. 2 *" << std::endl;
+
+		int userInput;
+		std::cout << "> "; //Comand PROMPT
+		std::cin >> userInput; //Wait user input
+		std::cout << std::endl;
+		switch (userInput)
+		{
+		case 1:
+		{
+			readMyMessages();
+			break;
+		}
+		case 2:
+		{
+			readAllMessages();
+			break;
+		}
+		default:
+			break;
+		}
+	}
 	case 0:
 	{
-		showLogInMenu();
-		_workStatus = false; //Change work status to "OFF"
-		break; }
+		_currentUser = nullptr;
+		break;
+	}
 	default:
 	{
 		std::cout << RED << "Вы ввели неверную команду!" << RESET << std::endl; //Error message if user input not define
@@ -187,5 +175,5 @@ void Chat::showUserMenu()
 		_workStatus = false; //Change work status to "OFF"
 		break;
 	}
-	} //switch
+	}
 }

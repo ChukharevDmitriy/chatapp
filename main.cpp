@@ -1,5 +1,4 @@
 #include "Chat.h"
-#include "color_txt.h"
 
 int main()
 {
@@ -15,8 +14,7 @@ int main()
 		{
 			std::cout <<GREEN<< "Добро пожаловать , " <<RESET<< chat.getCurrentUser()->getUserName() << " !" << std::endl;
 			std::cout << std::endl;
-			chat.showLogInMenu();
-			//chat.showUserMenu();
+			chat.showUserMenu();
 		}
 	}
 	return 0;
