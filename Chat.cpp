@@ -70,7 +70,8 @@ void Chat::sendMessages()
 	std::cout << "Введите сообщение для адреста " << _toUser << " :" << std::endl;
 	std::string _textMessage;
 	std::cout << "> "; //Comand PROMPT
-	std::cin >> _textMessage; //Wait user input
+	std::cin.ignore();
+    std::getline(std::cin, _textMessage); //Wait user input _text)
 	std::cout << std::endl;
 		
 	_messages.push_back(*std::make_shared<Message>(_currentUser->getUserName(), _toUser, _textMessage));
@@ -88,23 +89,29 @@ void Chat::showUsernames() const
 }
 void Chat::readMyMessages() const
 {
+	int count = 0; // счетчик сообщений если они есть
 	for (int i = 0; i < _messages.size(); i++)
 	{
 		if (_messages[i].getToUser() == this->_currentUser->getUserName())
 		{
 			std::cout << _messages[i].getFromUser() << " : " << _messages[i].getTextMessage() << std::endl;
+			count++;
 		}
 	}
+	if (count == 0) std::cout <<RED<< "Сообщений нет" <<RESET<< std::endl;
 }
 void Chat::readAllMessages() const
 {
+	int count = 0; // счетчик сообщений если они есть
 	for (int i = 0; i < _messages.size(); i++)
 	{
 		if (_messages[i].getToUser() == "all")
 		{
 			std::cout << _messages[i].getFromUser() << " : " << _messages[i].getTextMessage() << std::endl;
+			count++;
 		}
 	}
+	if (count == 0) std::cout << RED << "Сообщений нет" << RESET << std::endl;
 }
 void Chat::showLogInMenu()
 {
