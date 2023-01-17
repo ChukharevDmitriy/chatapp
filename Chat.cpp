@@ -48,22 +48,22 @@ bool Chat::isChatWork() const
 }
 void Chat::sendMessages()
 {
-	std::cout << "Выберите адреста из списка:" << std::endl;
+	std::cout << "Выберите адресата из списка:" << std::endl;
 	showUsernames();
-	int userInput;
+	int choice;
 	std::cout << "> "; //Comand PROMPT
-	std::cin >> userInput; //Wait user input
+	std::cin >> choice; //Wait user input
 	std::cout << std::endl;
 
 	std::string _toUser;
 
-	if (userInput == 0)
+	if (choice == 0)
 	{
 		_toUser = "all";
 	}
 	else
 	{
-		int i = userInput - 1;
+		int i = (choice - 1);
 		_toUser = _users[i].getUserName();
 	}
 
@@ -113,11 +113,11 @@ void Chat::showLogInMenu()
 	std::cout << "* Регистрация ............... 2 *" << std::endl;
 	std::cout << "* Выход из программы ........ 0 *" <<RESET<< std::endl;
 	
-	int userInput;
+	int userInputLogIn;
 	std::cout << "> "; //Comand PROMPT
-	std::cin >> userInput; //Wait user input
+	std::cin >> userInputLogIn; //Wait user input
 	std::cout << std::endl;
-	switch (userInput)
+	switch (userInputLogIn)
 	{
 	case 1: 
 	{	logIn();
@@ -155,11 +155,11 @@ void Chat::showUserMenu()
 	std::cout << "* Прочитать сообщения ........4 *" << std::endl;
 	std::cout << "* Сменить пользователя .......0 *" << RESET << std::endl;
 
-	int userInput;
+	int userInputUserMenu;
 	std::cout << "> "; //Comand PROMPT
-	std::cin >> userInput; //Wait user input
+	std::cin >> userInputUserMenu; //Wait user input
 	std::cout << std::endl;
-	switch (userInput)
+	switch (userInputUserMenu)
 	{
 	case 1:
 	{
@@ -200,13 +200,13 @@ void Chat::showUserMenu()
 		{
 			readMyMessages();
 			std::cout << std::endl;
-			showUserMenu();
+			break;
 		}
 		case 2:
 		{
 			readAllMessages();
 			std::cout << std::endl;
-			showUserMenu();
+			break;
 		}
 		default:
 			break;
